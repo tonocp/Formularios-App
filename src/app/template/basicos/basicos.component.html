@@ -34,7 +34,8 @@
                             ngModel
                             name="precio"
                             placeholder="Precio del producto"
-                            required>
+                            required
+                            min="0">
 
                     <span class="form-text text-danger"
                           *ngIf="precioValido()">
@@ -52,7 +53,10 @@
                             class="form-control"
                             ngModel
                             name="stock"
-                            placeholder="Stock del producto">
+                            customMin
+                            [minimo]="0"
+                            placeholder="Stock del producto"
+                            required>
                 </div>
             </div>
 
@@ -80,7 +84,11 @@
         <span>Touched</span>
         <pre> {{ miFormulario.touched }} </pre>
 
-        <span>Valid</span>
+        <span>Value</span>
         <pre> {{ miFormulario.value | json }} </pre>
+
+        <span>CustomDirective</span>
+        <pre> {{ miFormulario.controls.stock?.errors | json }} </pre>
+
     </div>
 </div>
