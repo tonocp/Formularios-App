@@ -1,21 +1,20 @@
 <h2>Reactive: <small>Básicos</small></h2>
+<hr />
 <div class="row">
   <div class="col">
-    <form autocomplete="off">
+    <form autocomplete="off" [formGroup]="miFormulario">
       <!-- Campo de producto -->
       <div class="mb-3 row">
         <label class="col-sm-3 col-form-label">Producto</label>
         <div class="col-sm-9">
           <input
             type="text"
-            class="form-control"            
-            name="producto"
+            class="form-control"
+            formControlName="nombre"
             placeholder="Nombre del producto"
-            required
-            minlength="3"
           />
 
-          <span class="form-text text-danger">
+          <span class="form-text text-danger" *ngIf="campoValido('nombre')">
             El nombre debe ser de al menos 3 caracteres.
           </span>
         </div>
@@ -28,13 +27,11 @@
           <input
             type="number"
             class="form-control"
-            name="precio"
+            formControlName="precio"
             placeholder="Precio del producto"
-            required
-            min="0"
           />
 
-          <span class="form-text text-danger">
+          <span class="form-text text-danger" *ngIf="campoValido('precio')">
             El precio debe ser mayor de 0.
           </span>
         </div>
@@ -47,20 +44,19 @@
           <input
             type="number"
             class="form-control"
-            name="stock"
-            customMin
+            formControlName="stock"
             placeholder="Stock del producto"
-            required
           />
+
+          <span class="form-text text-danger" *ngIf="campoValido('stock')">
+            El stock debe ser mayor de 0.
+          </span>
         </div>
       </div>
 
       <div class="row">
         <div class="col">
-          <button
-            type="submit"
-            class="btn btn-primary float-end"
-          >
+          <button type="submit" class="btn btn-primary float-end">
             Guardar
           </button>
         </div>
@@ -69,7 +65,7 @@
   </div>
 </div>
 
-<!-- <h5>Valid</h5>
+<h5>Valid</h5>
 <pre> {{ miFormulario.valid }} </pre>
 
 <h5>Pristine</h5>
@@ -81,5 +77,5 @@
 <h5>Value</h5>
 <pre> {{ miFormulario.value | json }} </pre>
 
-<h5>CustomDirective</h5>
-<pre> {{ miFormulario.controls.stock?.errors | json }} </pre> -->
+<h5>Precio</h5>
+<pre> {{ miFormulario.controls.precio.errors | json }} </pre>
