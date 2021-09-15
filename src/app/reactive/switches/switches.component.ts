@@ -21,6 +21,9 @@ export class SwitchesComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.miFormulario.reset(this.persona);
+    this.miFormulario.reset({
+      ...this.persona,
+      condiciones: false,
+    });
   }
 }
