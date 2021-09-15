@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './basicos.component.html',
   styles: [],
 })
-export class BasicosComponent {
+export class BasicosComponent implements OnInit {
   // EJEMPLO DE USO DE FORMGROUPS
   // miFormulario: FormGroup = new FormGroup({
   //   nombre: new FormControl('RTX 4080ti'),
@@ -23,10 +23,28 @@ export class BasicosComponent {
 
   constructor(private fb: FormBuilder) {}
 
+  ngOnInit(): void {
+    this.miFormulario.reset({
+      nombre: 'RTX 4080ti',
+      precio: 1600,
+      stock: 10,
+    });
+  }
+
   campoValido(campo: string) {
     return (
       this.miFormulario.controls[campo].errors &&
       this.miFormulario.controls[campo].touched
     );
+  }
+
+  guardar() {
+    if (this.miFormulario.invalid) {
+      this.miFormulario.markAllAsTouched();
+      return;
+    }
+
+    console.log('POST OK' + this.miFormulario.value);
+    this.miFormulario.reset();
   }
 }

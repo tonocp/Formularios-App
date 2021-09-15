@@ -2,7 +2,7 @@
 <hr />
 <div class="row">
   <div class="col">
-    <form autocomplete="off" [formGroup]="miFormulario">
+    <form (ngSubmit)="guardar()" autocomplete="off" [formGroup]="miFormulario">
       <!-- Campo de producto -->
       <div class="mb-3 row">
         <label class="col-sm-3 col-form-label">Producto</label>
@@ -11,7 +11,7 @@
             type="text"
             class="form-control"
             formControlName="nombre"
-            placeholder="Nombre del producto"
+            placeholder="Nombre del producto..."
           />
 
           <span class="form-text text-danger" *ngIf="campoValido('nombre')">
@@ -28,11 +28,11 @@
             type="number"
             class="form-control"
             formControlName="precio"
-            placeholder="Precio del producto"
+            placeholder="Precio del producto..."
           />
 
           <span class="form-text text-danger" *ngIf="campoValido('precio')">
-            El precio debe ser mayor de 0.
+            El precio debe ser 0 o mayor.
           </span>
         </div>
       </div>
@@ -45,11 +45,11 @@
             type="number"
             class="form-control"
             formControlName="stock"
-            placeholder="Stock del producto"
+            placeholder="Stock del producto..."
           />
 
           <span class="form-text text-danger" *ngIf="campoValido('stock')">
-            El stock debe ser mayor de 0.
+            El stock debe ser 0 o mayor.
           </span>
         </div>
       </div>

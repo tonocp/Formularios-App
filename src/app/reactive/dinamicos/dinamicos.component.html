@@ -1,18 +1,20 @@
 <h2>Reactive: <small> Dinámicos </small></h2>
 <hr />
 
-<form autocomplete="off">
-  <!-- Nombre -->
+<form autocomplete="off" [formGroup]="miFormulario">
+  <!-- Campo de Nombre -->
   <div class="mb-3 row">
     <label class="col-sm-3 col-form-label">Nombre:</label>
     <div class="col-sm-9">
       <input
+        type="text"
         class="form-control"
+        formControlName="nombre"
         placeholder="Nombre de la persona..."
-        name="nombre"
-        required
       />
-      <span class="form-text text-danger"> Nombre obligatorio </span>
+      <span class="form-text text-danger" *ngIf="campoValido('nombre')">
+        Nombre obligatorio
+      </span>
     </div>
   </div>
 
@@ -24,10 +26,17 @@
         <input
           class="form-control"
           placeholder="Agregar Juego Favorito..."
-          name="nuevoJuego"
+          [formControl]="nuevoFavorito"
+          (keyup.enter)="agregar()"
         />
 
-        <button class="btn btn-outline-primary" type="button">Agregar</button>
+        <button
+          class="btn btn-outline-primary"
+          type="button"
+          (click)="agregar()"
+        >
+          Agregar
+        </button>
       </div>
     </div>
   </div>
@@ -35,21 +44,39 @@
   <!-- Lista de Juegos Favoritos -->
   <div class="mb-3 row">
     <label class="col-sm-3 col-form-label">Favoritos:</label>
-    <div class="col-sm-9">
-      <div class="input-group mb-1">
-        <input class="form-control mb-1" required />
+    <div class="col-sm-9" formArrayName="favoritos">
+      <div
+        class="input-group mb-1"
+        *ngFor="let favorito of favoritosArr.controls; let i = index"
+      >
+        <input class="form-control mb-1" [formControlName]="i" />
 
-        <button class="btn btn-outline-danger" type="button">Borrar</button>
+        <button
+          class="btn btn-outline-danger"
+          type="button"
+          (click)="borrar(i)"
+        >
+          Borrar
+        </button>
       </div>
     </div>
   </div>
 
   <div class="row">
     <div class="col-sm-12">
-      <button type="button" class="btn btn-primary float-end">Guardar</button>
+      <button
+        type="button"
+        class="btn btn-primary float-end"
+        (click)="guardar()"
+      >
+        Guardar
+      </button>
     </div>
   </div>
 </form>
 
-<!-- <h5>Persona</h5>
-<pre>{{ persona | json }}</pre> -->
+<h5>Valid</h5>
+<pre> {{ miFormulario.valid }} </pre>
+<br />
+<h5>Value</h5>
+<pre> {{ miFormulario.value | json }} </pre>
