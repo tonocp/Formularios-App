@@ -60,19 +60,27 @@
           <input
             type="password"
             class="form-control"
+            formControlName="password"
             placeholder="Password de su cuenta..."
           />
+          <span class="form-text text-danger" *ngIf="validaCampo('password')">
+            La contraseña debe ser mayor de 6 caracteres y contener al menos una mayúscula, una minúscula, un número y un carácter especial
+          </span>
         </div>
       </div>
       <!-- Password 2 -->
       <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">Repita Password</label>
+        <label class="col-sm-3 col-form-label">Repita el Password</label>
         <div class="col-sm-9">
           <input
             type="password"
             class="form-control"
+            formControlName="password2"
             placeholder="Repita el Password"
           />
+          <span class="form-text text-danger" *ngIf="validaCampo('password2')">
+            Las contraseñas deben ser iguales
+          </span>
         </div>
       </div>
       <div class="row">
@@ -87,6 +95,8 @@
 </div>
 
 <h5>Form Valid: {{ miFormulario.valid }}</h5>
+<h5>Form Status: {{ miFormulario.status }}</h5>
+<h5>Form Errors: {{ miFormulario.errors | json }}</h5>
 <br />
 <h5>Nombre</h5>
 <pre>{{ miFormulario.controls.nombre.errors | json }}</pre>
@@ -96,3 +106,9 @@
 <br />
 <h5>Username</h5>
 <pre>{{ miFormulario.controls.username.errors | json }}</pre>
+<br />
+<h5>Password</h5>
+<pre>{{ miFormulario.controls.password.errors | json }}</pre>
+<br />
+<h5>Password 2</h5>
+<pre>{{ miFormulario.controls.password2.errors | json }}</pre>
