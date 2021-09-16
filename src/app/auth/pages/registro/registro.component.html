@@ -1,0 +1,98 @@
+<h2>Validaciones Reactive</h2>
+<hr />
+
+<div class="row">
+  <div class="col">
+    <form
+      autocomplete="off"
+      [formGroup]="miFormulario"
+      (ngSubmit)="submitFormulario()"
+    >
+      <!-- Nombre -->
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Nombre</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="nombre"
+            placeholder="Nombre y Apellidos..."
+          />
+          <span class="form-text text-danger" *ngIf="validaCampo('nombre')">
+            Debe ser en formato nombre y apellido
+          </span>
+        </div>
+      </div>
+      <!-- Email -->
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Email</label>
+        <div class="col-sm-9">
+          <input
+            type="email"
+            class="form-control"
+            formControlName="email"
+            placeholder="email@email.com"
+          />
+          <span class="form-text text-danger" *ngIf="validaCampo('email')">
+            Email válido y obligatorio
+          </span>
+        </div>
+      </div>
+      <!-- Username -->
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Usuario</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="username"
+            placeholder="Nombre del usuario..."
+          />
+          <span class="form-text text-danger" *ngIf="validaCampo('username')">
+            El usuario no puede ser 'usuario'
+          </span>
+        </div>
+      </div>
+      <!-- Password -->
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Password</label>
+        <div class="col-sm-9">
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Password de su cuenta..."
+          />
+        </div>
+      </div>
+      <!-- Password 2 -->
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Repita Password</label>
+        <div class="col-sm-9">
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Repita el Password"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button type="submit" class="btn btn-primary float-end">
+            Nuevo Usuario
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<h5>Form Valid: {{ miFormulario.valid }}</h5>
+<br />
+<h5>Nombre</h5>
+<pre>{{ miFormulario.controls.nombre.errors | json }}</pre>
+<br />
+<h5>Email</h5>
+<pre>{{ miFormulario.controls.email.errors | json }}</pre>
+<br />
+<h5>Username</h5>
+<pre>{{ miFormulario.controls.username.errors | json }}</pre>
