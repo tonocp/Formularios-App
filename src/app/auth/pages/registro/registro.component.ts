@@ -19,6 +19,21 @@ export class RegistroComponent implements OnInit {
     validators: [this.vs.passwordIguales('password','password2')]
   });
 
+  get emailErrorMsg(): string{
+    const errors = this.miFormulario.get('email')?.errors;
+    if( errors?.required ){
+      return 'Email obligatorio';
+    }
+    if(errors?.pattern){
+      return 'Inserte un email válido';
+    }
+    if(errors?.emailUsado){
+      return 'El email ya existe'
+    }
+
+    return '';
+  }
+
   constructor(private fb: FormBuilder, private vs: ValidatorService, private mailValid: EmailValidatorService) {}
 
   ngOnInit(): void {
@@ -41,4 +56,5 @@ export class RegistroComponent implements OnInit {
     console.log('FORM SUBMIT');
     this.miFormulario.markAllAsTouched();
   }
+
 }
