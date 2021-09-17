@@ -30,7 +30,6 @@ export class RegistroComponent implements OnInit {
     if(errors?.emailUsado){
       return 'El email ya existe'
     }
-
     return '';
   }
 
